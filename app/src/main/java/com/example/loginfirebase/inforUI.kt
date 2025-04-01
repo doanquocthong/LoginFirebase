@@ -1,5 +1,7 @@
 package com.example.loginfirebase
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -24,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -32,14 +35,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.navOptions
+import com.google.firebase.auth.FirebaseUser
+import gaur.himanshu.login.GoogleSignInUtils
 
 @Composable
-fun inforUI() {
+fun inforUI(navController: NavController) {
     Column (
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxSize().padding(top = 30.dp)
     ) {
-        Header()
+        Header(navController)
         Box(
             modifier = Modifier
             .weight(1f)
@@ -66,14 +73,10 @@ fun inforUI() {
 
 }
 
-@Preview (showBackground = true)
-@Composable
-fun pvinforUI() {
-    inforUI()
-}
 
 @Composable
-fun Header() {
+fun Header(navController: NavController) {
+    val context = LocalContext.current
     Row(
         modifier = Modifier
             .padding(15.dp)
@@ -107,6 +110,10 @@ fun Header() {
             modifier = Modifier
                 .size(40.dp)
                 .clickable {
+                    GoogleSignInUtils.signOut(context) {
+                        Log.d("Succes", "Đăng xuất thành công")
+                        navController.navigate("login")
+                    }
 
                 }
         )

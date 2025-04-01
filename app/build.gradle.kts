@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.loginfirebase"
-        minSdk = 24
+        minSdk = 34
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -42,10 +42,11 @@ android {
 
 dependencies {
     implementation(libs.play.services.auth)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.runtime.livedata)
     val nav_version = "2.8.9"
 
     implementation("androidx.navigation:navigation-compose:$nav_version")
-    implementation("com.google.android.gms:play-services-auth:20.7.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -69,6 +70,7 @@ dependencies {
 
     implementation ("com.google.android.libraries.identity.googleid:googleid:1.0.0")
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
-    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("androidx.credentials:credentials:1.2.0")
     implementation("com.google.android.gms:play-services-auth:20.7.0") // Google Sign-In
 }
